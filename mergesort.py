@@ -1,51 +1,66 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+# Overall more comments and explanations
+
+def assign_value(target_list, target_index, source_list, source_index): 
+    # Variable names, nameing convention for functions, function could be redundant
+    # Assigns the value from the source_list at source_index to the target_list at target_index.
+    target_list[target_index] = source_list[source_index]
 
 
-def mergeSort(list_to_sort_by_merge):
-    if (
-        len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
-        and len(list_to_sort_by_merge) != 0
-    ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
+def merge_sort(merge_list): # Shortened variable names, snakecase for python naming conventions
+    # Recursively sorts merge_list using the merge sort algorithm.
+    if len(merge_list) > 1: # Deleted redundant statements
+        # Find the middle point to divide the array into two halves
+        mid = len(merge_list) // 2
+        left_half = merge_list[:mid]
+        right_half = merge_list[mid:]
 
-        mergeSort(left)
-        mergeSort(right)
+        # Recursively sort the two halves
+        merge_sort(left_half)
+        merge_sort(right_half)
 
-        l = 0
-        r = 0
-        i = 0
+        # Initialize indices for merging
+        left_index = 0
+        right_index = 0
+        merge_index = 0
 
-        while l < len(left) and r < len(right):
-            if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
-                l += 1
+        # Merge the sorted halves
+        while left_index < len(left_half) and right_index < len(right_half):
+            if left_half[left_index] <= right_half[right_index]:
+                assign_value(merge_list, merge_index, left_half, left_index)
+                left_index += 1
             else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
-                r += 1
-            i += 1
+                assign_value(merge_list, merge_index, right_half, right_index)
+                right_index += 1
+            merge_index += 1
 
-        while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
-            l += 1
-            i += 1
+        # Copy any remaining elements of left_half
+        while left_index < len(left_half):
+            merge_list[merge_index] = left_half[left_index]
+            left_index += 1
+            merge_index += 1
 
-        while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
-            r += 1
-            i += 1
+        # Copy any remaining elements of right_half
+        while right_index < len(right_half):
+            merge_list[merge_index] = right_half[right_index]
+            right_index += 1
+            merge_index += 1
 
 
 import matplotlib.pyplot as plt
 
-my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-x = range(len(my_list))
-plt.plot(x, my_list)
+# Example list to be sorted
+example_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+
+# Plot the original list
+x = range(len(example_list))
+plt.plot(x, example_list, label='Original')
+plt.legend()
 plt.show()
-mergeSort(my_list)
-x = range(len(my_list))
-plt.plot(x, my_list)
+
+# Sort the list using merge sort
+merge_sort(example_list)
+
+# Plot the sorted list
+plt.plot(x, example_list, label='Sorted')
+plt.legend()
 plt.show()
