@@ -1,12 +1,15 @@
 # Overall more comments and explanations
 
+
 def assign_value(target_list, target_index, source_list, source_index): 
-    # Variable names, nameing convention for functions, function could be redundant
-    # Assigns the value from the source_list at source_index to the target_list at target_index.
+    # Variable names, nameing convention for functions
+    # Assigns the values
     target_list[target_index] = source_list[source_index]
 
 
-def merge_sort(merge_list): # Shortened variable names, snakecase for python naming conventions
+
+def merge_sort(merge_list):
+# Shortened variable names, snakecase for python naming conventions
     # Recursively sorts merge_list using the merge sort algorithm.
     if len(merge_list) > 1: # Deleted redundant statements
         # Find the middle point to divide the array into two halves
@@ -53,7 +56,7 @@ example_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 
 # Plot the original list
 x = range(len(example_list))
-plt.plot(x, example_list, label='Original')
+plt.plot(x, example_list, label = 'Original')
 plt.legend()
 plt.show()
 
@@ -61,6 +64,6 @@ plt.show()
 merge_sort(example_list)
 
 # Plot the sorted list
-plt.plot(x, example_list, label='Sorted')
+plt.plot(x, example_list, label = 'Sorted')
 plt.legend()
 plt.show()
